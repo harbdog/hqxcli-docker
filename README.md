@@ -21,7 +21,7 @@ Like the hqxSharp project, the focus of this code is asset creation and usage in
 		Darshan@Darshan-HP:/Codice/Java/hqx-java/target$ java -jar .\hqx-java.jar
 		hqx image converter
 		Usage -> hqx.jar [options] inputFile
-				 the input file can olso be specified with an option
+				 the input file can also be specified with an option
 				 If not overridden output file name will be inputfile.hq2x.png of hq2x
 				 hq3x.png for hq3x and so on
 
