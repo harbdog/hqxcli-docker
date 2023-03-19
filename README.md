@@ -9,7 +9,19 @@
 
 To simplify ability to build the jar and run the CLI by using docker.
 
-### Build and run as a docker CLI image
+### Run as a pre-built docker image
+
+A pre-built docker image has been made available in Docker Hub:
+[harbdog/hqxcli](https://hub.docker.com/repository/docker/harbdog/hqxcli)
+
+The following command will run the image using the `hq4x` scaler, mount the current directory in the
+working directory (`/pwd`), and use relative paths to the input/output image files from the current directory.
+
+```bash
+docker run --rm -v $(pwd):/pwd harbdog/hqxcli --hq4x --input ./images/red-dragon.png --output ./images/red-dragon-4x.png
+```
+
+### Build and run as a docker image
 
 ```bash
 docker build . -t hqxcli
