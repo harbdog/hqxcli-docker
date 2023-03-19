@@ -1,13 +1,22 @@
-# HqxCli-Java
+# HqxCli-Docker
 
-![original](images/red-dragon.png?raw=true)
-![hq2x](images/red-dragon-2x.png?raw=true)
-![hq3x](images/red-dragon-3x.png?raw=true)
-![hq4x](images/red-dragon-4x.png?raw=true)
+This is a HQX 2x/3x/4x pixel art scaler Java CLI built in a docker image.
+
+# Examples
+
+| Original (80x80) | hq2x (160x160) | hq3x (240x240) |
+| --- | --- | --- |
+| ![original](images/red-dragon.png?raw=true) | ![hq2x](images/red-dragon-hq2x.png?raw=true) | ![hq3x](images/red-dragon-hq3x.png?raw=true) |
+
+| | | |
+| --- | --- | --- |
+| **hq4x (320x320)** | ![hq4x](images/red-dragon-hq4x.png?raw=true) |
+| **nearest 4x (320x320)** | ![nearest4x](images/red-dragon-nearest-4x.png?raw=true) |
+| **linear 4x (320x320)** | ![linear4x](images/red-dragon-linear-4x.png?raw=true) |
 
 ## What is this fork of a fork for?
 
-To simplify ability to build the jar and run the CLI by using docker.
+To simplify ability to build the CLI jar and run it using docker.
 
 ### Run as a pre-built docker image
 
@@ -18,30 +27,30 @@ The following command will run the image using the `hq4x` scaler, mount the curr
 working directory (`/pwd`), and use relative paths to the input/output image files from the current directory.
 
 ```bash
-docker run --rm -v $(pwd):/pwd harbdog/hqxcli --hq4x --input ./images/red-dragon.png --output ./images/red-dragon-4x.png
+docker run --rm -v $(pwd):/pwd harbdog/hqxcli:latest --hq4x --input ./images/red-dragon.png --output ./images/red-dragon-4x.png
 ```
 
 ### Build and run as a docker image
 
 ```bash
-docker build . -t hqxcli
+docker build . -t hqxcli:local
 ```
 
-This builds a runnable image locally named `hqxcli`. It can then be run as follows:
+This builds a runnable image locally with tag `hqxcli:local`. It can then be run as follows:
 
 ```bash
-docker run --rm -v $(pwd):/pwd hqxcli --hq2x --input ./images/red-dragon.png --output ./images/red-dragon-2x.png
+docker run --rm -v $(pwd):/pwd hqxcli:local --hq2x --input ./images/red-dragon.png --output ./images/red-dragon-2x.png
 
-docker run --rm -v $(pwd):/pwd hqxcli --hq3x --input ./images/red-dragon.png --output ./images/red-dragon-3x.png
+docker run --rm -v $(pwd):/pwd hqxcli:local --hq3x --input ./images/red-dragon.png --output ./images/red-dragon-3x.png
 
-docker run --rm -v $(pwd):/pwd hqxcli --hq4x --input ./images/red-dragon.png --output ./images/red-dragon-4x.png
+docker run --rm -v $(pwd):/pwd hqxcli:local --hq4x --input ./images/red-dragon.png --output ./images/red-dragon-4x.png
 ```
 
 ### Build just the runnable jar using docker
 
 ```bash
-image=maven:3.6.3-jdk-8
-docker run -it --rm -v $(pwd):/usr/src/hqxcli-java -w /usr/src/hqxcli-java $image mvn clean install
+build_image=maven:3.6.3-jdk-8
+docker run -it --rm -v $(pwd):/usr/src/hqxcli-java -w /usr/src/hqxcli-java $build_image mvn clean install
 ```
 
 This creates self-contained runnable jar at: `./target/hqx-java-1.0.0-jar-with-dependencies.jar`
