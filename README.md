@@ -1,6 +1,23 @@
 # HqxCli-Java
 
-## What is this fork for?
+## What is this fork of a fork for?
+
+To build the jar and run as CLI using docker.
+
+### Build the jar using docker
+
+```bash
+image=maven:3.6.3-jdk-8
+docker run -it --rm -v $(pwd):/usr/src/hqxcli-java -w /usr/src/hqxcli-java $image mvn clean install
+```
+
+This creates self-contained runnable jar at: `./target/hqx-java-1.0.0-jar-with-dependencies.jar`
+
+### Run the CLI using docker
+
+`TODO`
+
+## What is the original fork for?
 
 I did not touch a single line of the algorithm code but I did some modification:
 

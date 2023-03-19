@@ -6,6 +6,7 @@
 package com.thedarshan.hqx;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -22,7 +23,7 @@ import java.nio.file.Paths;
  */
 public class MainTest {
     
-    public static final String INPUT_IMAGES_FOLDER ="C:\\tmp\\";
+    public static final String INPUT_IMAGES_FOLDER ="/tmp/";
     public static final String OUTPUT_IMAGES_FOLDER =INPUT_IMAGES_FOLDER;
     public static final String INDEXED_COLOR_IMAGE = "Invaders.png";
     public static final String TRUE_COLOR_IMAGE = "lena_std.png";
@@ -63,8 +64,11 @@ public class MainTest {
     
     public void testOne(String option, String inputFilePath) {
         File f= new File(inputFilePath);
+        try {
+            f.createNewFile();
+        } catch (IOException ex) {}
         if(!f.exists())
-            fail("Unable to open " + inputFilePath);
+            fail("Unable to create " + inputFilePath);
         String[] args = {"--all" , inputFilePath};        
         Main.main(args);
         checkOutput(inputFilePath, 2, 4);    
