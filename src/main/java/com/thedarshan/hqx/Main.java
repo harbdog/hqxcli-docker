@@ -79,10 +79,6 @@ public class Main {
             nformat += 2;
         }
 
-        if (nformat == 0) {
-            System.err.println("No scaling method specified, hq2x will be used.");
-        }
-
         if (options.hasArgument("output")) {
             outputFile = (String) options.valueOf("output");
         }
@@ -94,8 +90,9 @@ public class Main {
 
         }
 
-        if (options.hasArgument("output") && nformat > 0) {
-            System.err.println("Can't specify output for multiple conversion, standard pattern will be used.");            
+        if (options.hasArgument("output") && nformat > 1) {
+            System.err.println("Can't specify output for multiple conversion.");
+            return;
         }
 
         if (!(options.has("hq2x") || options.has("all") || options.has("hq3x") || options.has("hq4x"))) {

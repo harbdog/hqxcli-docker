@@ -1,10 +1,31 @@
 # HqxCli-Java
 
+![original](images/red-dragon.png?raw=true)
+![hq2x](images/red-dragon-2x.png?raw=true)
+![hq3x](images/red-dragon-3x.png?raw=true)
+![hq4x](images/red-dragon-4x.png?raw=true)
+
 ## What is this fork of a fork for?
 
-To build the jar and run as CLI using docker.
+To simplify ability to build the jar and run the CLI by using docker.
 
-### Build the jar using docker
+### Build and run as a docker CLI image
+
+```bash
+docker build . -t hqxcli
+```
+
+This builds a runnable image locally named `hqxcli`. It can then be run as follows:
+
+```bash
+docker run --rm -v $(pwd):/pwd hqxcli --hq2x --input ./images/red-dragon.png --output ./images/red-dragon-2x.png
+
+docker run --rm -v $(pwd):/pwd hqxcli --hq3x --input ./images/red-dragon.png --output ./images/red-dragon-3x.png
+
+docker run --rm -v $(pwd):/pwd hqxcli --hq4x --input ./images/red-dragon.png --output ./images/red-dragon-4x.png
+```
+
+### Build just the runnable jar using docker
 
 ```bash
 image=maven:3.6.3-jdk-8
@@ -13,9 +34,9 @@ docker run -it --rm -v $(pwd):/usr/src/hqxcli-java -w /usr/src/hqxcli-java $imag
 
 This creates self-contained runnable jar at: `./target/hqx-java-1.0.0-jar-with-dependencies.jar`
 
-### Run the CLI using docker
-
-`TODO`
+```bash
+java -jar ./target/hqx-java-1.0.0-jar-with-dependencies.jar --hq4x --input ./images/red-dragon.png
+```
 
 ## What is the original fork for?
 
@@ -33,7 +54,7 @@ __hqx-java__ is a Java port of the excellent [hqxSharp](http://code.google.com/p
 
 Like the hqxSharp project, the focus of this code is asset creation and usage in tools, so no optimizations were done, just an almost-direct copy of the code.
 
-## Usage
+## Jar Usage
 
 		Darshan@Darshan-HP:/Codice/Java/hqx-java/target$ java -jar .\hqx-java.jar
 		hqx image converter
