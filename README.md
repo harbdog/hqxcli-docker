@@ -35,6 +35,20 @@ working directory (`/pwd`), and use relative paths to the input/output image fil
 docker run --rm -v $(pwd):/pwd harbdog/hqxcli:latest --hq4x --input ./images/red-dragon.png --output ./images/red-dragon-4x.png
 ```
 
+#### Bash example batching
+
+To run on all png files in the current directory:
+
+```bash
+for f in ./*.png; do docker run --rm -v $(pwd):/pwd hqxcli:local --hq4x --input=$f; done
+```
+
+To run on and overwrite all png files in current directory:
+
+```bash
+for f in ./*.png; do docker run --rm -v $(pwd):/pwd hqxcli:local --hq4x --input=$f --output=$f; done
+```
+
 ### Build and run as a docker image
 
 ```bash
