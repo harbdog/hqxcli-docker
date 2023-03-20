@@ -61,7 +61,7 @@ public class Main {
         int nformat = 0;
 
         if (args.length == 0) {
-            System.err.println("Must specify the input file at least");
+            System.err.println("Must specify an input file");
             showHelp(parser);
             return;
         }
@@ -87,16 +87,21 @@ public class Main {
             inputFile = (String) options.valueOf("input");
         } else {
             inputFile = args[args.length - 1];
+        }
 
+        if (inputFile.startsWith("-")) {
+            System.err.println("Must specify an input file");
+            showHelp(parser);
+            return;
         }
 
         if (options.hasArgument("output") && nformat > 1) {
-            System.err.println("Can't specify output for multiple conversion.");
+            System.err.println("Cannot specify output for multiple conversion");
             return;
         }
 
         if (!(options.has("hq2x") || options.has("all") || options.has("hq3x") || options.has("hq4x"))) {
-            System.err.println("You have to specify at least one scaling type");
+            System.err.println("Must specify at least one scaling type");
             showHelp(parser);
             return;
         }
@@ -105,7 +110,7 @@ public class Main {
         try {
             inputImage = ImageIO.read(new FileInputStream(inputFile));
         } catch (IOException ex) {
-            System.err.println("Can't load " + inputFile);
+            System.err.println("Cannot load " + inputFile);
             return;
         }
 
@@ -123,17 +128,7 @@ public class Main {
             convert(inputImage,inputFile, outputFile, HQ4X);
         }
         RgbYuv.RgbYuv_dispose();
-
     }
-    
-    private static boolean convert(BufferedImage inputImage, String outputFile, short algo){
-        return convert(inputImage,"" , outputFile, algo);
-    }
-    
-    private static boolean convert(String inputFile, String outputFile, short algo){
-        return convert(null, inputFile , outputFile, algo);
-    }
-    
 
     private static boolean convert(BufferedImage inputImage, String inputFile, String outputFile, short algo) {
 
@@ -149,7 +144,7 @@ public class Main {
             try {
                 inputImage = ImageIO.read(new FileInputStream(inputFile));
             } catch (IOException ex) {
-                System.err.println("Can't load " + inputFile);
+                System.err.println("Cannot load " + inputFile);
                 return false;
             }
         }
@@ -184,12 +179,13 @@ public class Main {
             try {
                 // Save our result
                 ImageIO.write(destinationBuffer, "PNG", new File(outputFile));
+                System.out.println("Scaled image written to " + outputFile);
             } catch (IOException ex) {
-                System.err.println("Can't write image to " + outputFile);
+                System.err.println("Cannot write image to " + outputFile);
             }
             return true;
         }
-        System.err.println("Can't convert " + inputFile);
+        System.err.println("Cannot convert " + inputFile);
         return false;
 
     }

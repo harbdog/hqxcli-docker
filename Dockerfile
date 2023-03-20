@@ -8,6 +8,7 @@ RUN mkdir /dist && mv ./target/hqx-java-*-jar-with-dependencies.jar /dist/hqx-ja
 
 
 FROM openjdk:8-slim-bullseye
+LABEL source.repository="https://github.com/harbdog/hqxcli-docker"
 
 COPY --from=builder /dist /
 
