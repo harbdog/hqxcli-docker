@@ -23,6 +23,11 @@ To simplify ability to build the CLI jar and run it using docker.
 A pre-built docker image has been made available in Docker Hub:
 [harbdog/hqxcli](https://hub.docker.com/repository/docker/harbdog/hqxcli)
 
+```bash
+docker pull harbdog/hqxcli:latest
+docker run --rm harbdog/hqxcli:latest --help
+```
+
 The following command will run the image using the `hq4x` scaler, mount the current directory in the
 working directory (`/pwd`), and use relative paths to the input/output image files from the current directory.
 
@@ -74,26 +79,6 @@ __hqx__ ("hq" stands for "high quality" and "x" stands for magnification) is one
 __hqx-java__ is a Java port of the excellent [hqxSharp](http://code.google.com/p/hqx-sharp) C# port, which itself is a port of the original [hqx](http://code.google.com/p/hqx) C project
 
 Like the hqxSharp project, the focus of this code is asset creation and usage in tools, so no optimizations were done, just an almost-direct copy of the code.
-
-## Jar Usage
-
-		Darshan@Darshan-HP:/Codice/Java/hqx-java/target$ java -jar .\hqx-java.jar
-		hqx image converter
-		Usage -> hqx.jar [options] inputFile
-				 the input file can also be specified with an option
-				 If not overridden output file name will be inputfile.hq2x.png of hq2x
-				 hq3x.png for hq3x and so on
-
-		Option             Description
-		------             -----------
-		-?, -h, --help     show help
-		--all              Upscale the input file with hq2x,hq3x,hq4x
-		--hq2x             Upscale the input file with hq2x
-		--hq3x             Upscale the input file with hq3x
-		--hq4x             Upscale the input file with hq4x
-		--input            Specify input file
-		--output           Override the default naming convention for output file
-
 
 ## Examples
 Original links are dead ([hq2x](http://www.hiend3d.com/hq2x.html) and [hq3x](http://www.hiend3d.com/hq3x.html))

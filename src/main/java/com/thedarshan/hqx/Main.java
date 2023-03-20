@@ -32,9 +32,9 @@ public class Main {
         parser.accepts("hq2x", "Upscale the input file with hq2x");
         parser.accepts("hq3x", "Upscale the input file with hq3x");
         parser.accepts("hq4x", "Upscale the input file with hq4x");
-        parser.accepts("all", "Upscale the input file with hq2x,hq3x,hq4x");
-        parser.accepts("output", "Override the default naming convention for output file").withRequiredArg();
-        parser.accepts("input", "Specify input file").withRequiredArg();
+        parser.accepts("all", "Upscale the input file with hq2x, hq3x, and hq4x");
+        parser.accepts("input", "Specify input image file").withRequiredArg();
+        parser.accepts("output", "Override default name for output image file").withRequiredArg();
         parser.acceptsAll(asList("h", "?", "help"), "show help").forHelp();
         parser.formatHelpWith(new CustomHelpFormatter());
 
@@ -117,15 +117,15 @@ public class Main {
         RgbYuv.RgbYuv_init();
         if (options.has("hq2x") || options.has("all")) {
             System.err.println("Scaling " + inputFile + " with hq2x");
-            convert(inputImage,inputFile, outputFile, HQ2X);
+            convert(inputImage, inputFile, outputFile, HQ2X);
         }
         if (options.has("hq3x") || options.has("all")) {
             System.err.println("Scaling " + inputFile + " with hq3x");
-            convert(inputImage,inputFile, outputFile, HQ3X);
+            convert(inputImage, inputFile, outputFile, HQ3X);
         }
         if (options.has("hq4x") || options.has("all")) {
             System.err.println("Scaling " + inputFile + " with hq4x");
-            convert(inputImage,inputFile, outputFile, HQ4X);
+            convert(inputImage, inputFile, outputFile, HQ4X);
         }
         RgbYuv.RgbYuv_dispose();
     }
@@ -203,8 +203,8 @@ public class Main {
             StringBuilder sb = new StringBuilder();
             sb.append("Usage -> hqx.jar [options] inputFile\n");
             sb.append("\t the input file can also be specified with an option \n");
-            sb.append("\t If not overriden output file name will be inputfile.hq2x.png of hq2x \n");
-            sb.append("\t hq3x.png for hq3x and so on \n \n");
+            sb.append("\t If not provided, output file name will be inputfile_hq2x.png for hq2x, \n");
+            sb.append("\t hq3x.png for hq3x, and so on. \n \n");
             sb.append(baseFormatter.format(options));
             return sb.toString();
         }
